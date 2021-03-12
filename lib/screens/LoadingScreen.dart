@@ -8,8 +8,15 @@ class LoadingScreen extends StatefulWidget {
 class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {},
+          child: Text(
+            "Get Location",
+          ),
+        ),
+      ),
     );
   }
 }

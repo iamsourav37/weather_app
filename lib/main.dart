@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/screens/LoadingScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,9 +11,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Weather App",
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
+      theme: ThemeData.dark(),
+      home: LoadingScreen(),
     );
   }
 }
