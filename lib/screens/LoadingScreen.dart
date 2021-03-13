@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/services/location.dart';
+import 'package:weather_app/services/networking.dart';
+
+const String apiKey = '4c15e5152554d721a2d364658112e7cf';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -7,11 +10,19 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  void getLocation() async {
+  double latitude;
+  double longitude;
+
+  void getLocationData() async {
     Location location = Location();
     await location.getCuttentPosition();
-    print(location.latitude);
-    print(location.longitude);
+    this.latitude = location.latitude;
+    this.longitude = location.longitude;
+    var url1 = "api.openweathermap.org";
+    var url2 =
+        "/data/2.5/weather?lat={$latitude}&lon={$longitude}&appid={$apiKey}";
+    NetworkHelper networkHelper = NetworkHelper(url1: url1, url2: url2);
+    await networkHelper.getData();
   }
 
   @override
@@ -19,7 +30,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-          onPressed: getLocation,
+          onPressed: getLocationData,
           child: Text(
             "Get Location",
           ),
