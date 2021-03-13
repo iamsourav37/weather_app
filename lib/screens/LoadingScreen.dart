@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/services/location.dart';
 import 'package:weather_app/services/networking.dart';
 
-const String apiKey = '4c15e5152554d721a2d364658112e7cf';
+const String apiKey = '36f8986f4539ff824760c97bcfc35662';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -12,16 +12,15 @@ class LoadingScreen extends StatefulWidget {
 class _LoadingScreenState extends State<LoadingScreen> {
   double latitude;
   double longitude;
-
   void getLocationData() async {
     Location location = Location();
     await location.getCuttentPosition();
     this.latitude = location.latitude;
     this.longitude = location.longitude;
-    var url1 = "api.openweathermap.org";
-    var url2 =
-        "/data/2.5/weather?lat={$latitude}&lon={$longitude}&appid={$apiKey}";
-    NetworkHelper networkHelper = NetworkHelper(url1: url1, url2: url2);
+    String url =
+        "api.weatherstack.com/current?access_key=$apiKey&query=$latitude,$longitude";
+
+    NetworkHelper networkHelper = NetworkHelper(url: url);
     await networkHelper.getData();
   }
 
